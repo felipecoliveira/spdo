@@ -1,7 +1,7 @@
 from django.db import models
 
 '''
-  TODO: override de __str__ nos modelos
+  TODO: Adicionar campo Situacao na tabela Protocolo
 '''
 class Area(models.Model):
     sigla = models.CharField(max_length=20)
@@ -64,6 +64,11 @@ class Anexo(models.Model):
     def __str__(self):
       return self.arquivo
 
+class Situacao(models.Model):
+   nome = models.CharField(max_length=40)
+   inicial = models.IntegerField()
+   final = models.IntegerField()
+
 class Protocolo(models.Model):
    seq = models.IntegerField()
    ano = models.IntegerField()
@@ -76,7 +81,55 @@ class Protocolo(models.Model):
    usuario = models.CharField(max_length=50)
    tipo_documento = models.ForeignKey(TipoDocumento)
    observacao = models.ForeignKey(Observacao)
+   situacao = models.ForeignKey(Situacao)
 
    def __str__(self):
       return self.seq
- 
+
+class PessoaOrigem(models.Model):
+   protocolo = models.ForeignKey(Protocolo)
+   pessoa = models.ForeignKey(Pessoa)
+
+class TipoEntrega(models.Model):
+   nome = models.CharField(max_length=40)
+
+class PessoaDestino(models.Model):
+   protocolo = models.ForeignKey(Protocolo)
+   pessoa = models.ForeignKey(Pessoa)
+   tipo_entrega = models.ForeignKey(TipoEntrega)
+
+class Notificacao(models.Model):
+   pessoa = models.ForeignKey(Pessoa)
+   protocolo = models.ForeignKey(Protocolo)
+
+class Referencia(models.Model):
+   protocolo = models.ForeignKey(Protocolo, null=False, related_name='protocolo')
+   referencia = models.ForeignKey(Protocolo, null=False, related_name='referencia')
+
+class TramiteInbox(models.Model):
+   protocolo = models.ForeignKey(Protocolo)
+   area = models.ForeignKey(Area)
+
+class TramiteOutbox(models.Model):
+   protocolo = models.ForeignKey(Protocolo)
+   area = models.ForeignKey(Area)
+
+class Fluxo(models.Model):
+   nome = models.CharField(max_length=40)
+   tipo_documento = models.ForeignKey(TipoDocumento)
+   
+class Transicao(models.Model):
+   fluxo = models.ForeignKey(Fluxo)
+   area_origem = models.ForeignKey(Area, null=False, related_name='area_origem')
+   area_destino = models.ForeignKey(Area, null=False, related_name='area_destino')
+
+class Tramite(models.Model):
+   protocolo = models.ForeignKey(Protocolo)
+   area = models.ForeignKey(Area, null=False, related_name='area')
+   data_disponibilidade = models.DateTimeField()
+   data_recebimento = models.DateTimeField()
+   acao = models.CharField(max_length=2000)
+   copia = models.IntegerField()
+   area_anterior = models.ForeignKey(Area, null=True, related_name='area_anterior')
+   responsavel = models.ForeignKey(Responsavel)
+   usuario = models.CharField(max_length=40)
