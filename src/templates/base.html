@@ -1,0 +1,55 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=devicewidth, initial-scale=1">
+     <title>SPDO - Sistema de Protocolo de Documentos</title>
+     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+     {% block css %}
+     {% endblock %}
+  </head>
+  <body>
+        <div class="page-header">
+             <h3>SPDO - Sistema de Protocolo de Documentos</h3>
+        </div>
+	<div class="container">
+	    <div class="row">
+        <div class="col-sm-5 col-md-2 sidebar">
+          <strong>Menu Principal</strong>
+          <ul class="nav nav-sidebar">
+              <li><a href="{% url 'protocolos' %}">Protocolar Documento</a></li>            
+              <li><a href="{% url 'pessoas' %}">Cadastrar Pessoa</a></li>               
+<!--               <li>Meus protocolos</li>  
+              <li>Minhas notificações</li>  -->     
+          </ul>
+<!--           <strong>Tramitação</strong>
+          <ul class="nav nav-sidebar">
+              <li>Enviar</li>            
+              <li>Receber</li>
+              <li>Recuperar</li>               
+          </ul> -->
+          <strong>Tabelas Auxiliares</strong>
+            <ul class="nav nav-sidebar">
+              <li><a href="{% url 'ufs' %}">UF</a></li>  
+              <li><a href="{% url 'areas' %}">Áreas</a></li>   
+              <li><a href="{% url 'responsaveis' %}">Responsável</a></li>
+              <li><a href="{% url 'tipodocumentos' %}">Tipo de Documentos</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-7  main">
+		      {% block content %}
+		      {% endblock %}
+        </div>
+      </div>
+	</div>
+
+  	<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  	<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  	{% block js %}
+  	{% endblock %}
+  </body>
+</html>

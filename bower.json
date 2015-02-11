@@ -1,0 +1,11 @@
+{
+  "name":"spdo",
+  "version": "0.01",
+  "homepage": "https://github.com/interlegis/spdo2",
+  "authors": [
+    "Edward Ribeiro <eribeiro@interlegis.leg.br>"
+  ],
+  "dependencies": {
+     "bootstrap":"~3.2.0"
+  }
+}

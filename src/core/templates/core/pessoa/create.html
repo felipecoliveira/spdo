@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+
+<form action="{% url 'pessoa_create' %}" method="POST">
+  {% csrf_token %}
+  
+  {% if form.non_field_errors %}
+  <div class="alert alert-warning" role="alert">
+        {{ form.non_field_errors }}
+  </div>
+  {% endif %}
+
+ <div class="form-group"> 
+ 	<div class="input-group">
+		{% for field in form %}
+    		{{ field.help_text }}
+    		<div>
+      			{{ field.label_tag }} {{ field  | add_class:'form-control' }}
+    		</div>
+    		<div id="{{ field.auto_id }}_errors">
+      			{{ field.errors }}
+    		</div>
+    	{% endfor %}
+	</div>
+ </div>
+ <span class="input-group-btn">
+    <input class="btn btn-primary" type="submit" value="Cadastrar Pessoa" />
+ </span>
+</form>
+
+{% endblock %}

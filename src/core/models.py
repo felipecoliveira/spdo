@@ -3,9 +3,25 @@ from django.db import models
 '''
   TODO: override de __str__ nos modelos
 '''
+class Area(models.Model):
+    sigla = models.CharField(max_length=20)
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+      return self.sigla
+
 class Uf(models.Model):
     sigla = models.CharField(max_length=2)
     nome = models.CharField(max_length=40)
+
+    def __str__(self):
+      return self.sigla
+
+class TipoDocumento(models.Model):
+    nome = models.CharField(max_length=40)
+
+    def __str__(self):
+      return self.nome
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100)
@@ -21,28 +37,32 @@ class Pessoa(models.Model):
     contato = models.CharField(max_length=100)
     senha = models.CharField(max_length=20)
 
+    def __str__(self):
+      return self.nome
+
 class Responsavel(models.Model):
     pessoa = models.ForeignKey(Pessoa)
     data = models.DateTimeField()
 
-class Area(models.Model):
-    sigla = models.CharField(max_length=20)
-    nome = models.CharField(max_length=100)
-
-class TipoDocumento(models.Model):
-    nome = models.CharField(max_length=40)
-
+    def __str__(self):
+      return self.pessoa.nome
 
 class Observacao(models.Model):
     texto = models.CharField(max_length=2000) # qual o tam maximo?
     data_observacao = models.DateTimeField()
     usuario = models.CharField(max_length=50)
 
+    def __str__(self):
+      return self.texto
+
 class Anexo(models.Model):
     arquivo = models.CharField(max_length=2000) # qual o tamanho maximo?
     tamanho = models.IntegerField()
     data_anexo = models.DateTimeField()
     usuario = models.CharField(max_length=50) # FK?
+
+    def __str__(self):
+      return self.arquivo
 
 class Protocolo(models.Model):
    seq = models.IntegerField()
@@ -56,4 +76,7 @@ class Protocolo(models.Model):
    usuario = models.CharField(max_length=50)
    tipo_documento = models.ForeignKey(TipoDocumento)
    observacao = models.ForeignKey(Observacao)
+
+   def __str__(self):
+      return self.seq
  
