@@ -31,6 +31,12 @@ class AreaUpdate(UpdateView):
    success_url = '/areas'
    template_name = 'core/area/edit.html'
 
+class AreaDelete(DeleteView):
+   model = Area
+   context_object_name = 'area'
+   template_name = 'core/area/confirm_delete.html'
+   success_url = '/areas'
+
 class UfView(ListView):
    model = Uf
    context_object_name = 'ufs'
@@ -46,6 +52,12 @@ class UfUpdate(UpdateView):
    model = Uf
    success_url = '/uf'
    template_name = 'core/uf/edit.html'
+
+class UfDelete(DeleteView):
+   model = Uf
+   context_object_name = 'uf'
+   template_name = 'core/uf/confirm_delete.html'
+   success_url = '/uf'   
 
 class TipoDocumentoView(ListView):
    model = TipoDocumento
@@ -63,6 +75,12 @@ class TipoDocumentoUpdate(UpdateView):
    success_url = '/tipodocumento'
    template_name = 'core/tipodocumento/edit.html'
 
+class TipoDocumentoDelete(DeleteView):
+   model = TipoDocumento
+   context_object_name = 'tipodocumento'
+   template_name = 'core/tipodocumento/confirm_delete.html'
+   success_url = '/tipodocumento'   
+
 class PessoaView(ListView):
    model = Pessoa
    context_object_name = 'pessoas'
@@ -79,6 +97,12 @@ class PessoaUpdate(UpdateView):
    success_url = '/pessoa'
    template_name = 'core/pessoa/edit.html' 
 
+class PessoaDelete(DeleteView):
+   model = Pessoa
+   context_object_name = 'pessoa'
+   template_name = 'core/pessoa/confirm_delete.html'
+   success_url = '/pessoa'   
+
 class ResponsavelView(ListView):
    model = Responsavel
    context_object_name = 'responsaveis'
@@ -93,7 +117,13 @@ class ResponsavelCreate(CreateView):
 class ResponsavelUpdate(UpdateView):
    model = Responsavel
    success_url = '/responsavel'
-   template_name = 'core/responsavel/edit.html'  
+   template_name = 'core/responsavel/edit.html'
+
+class ResponsavelDelete(DeleteView):
+   model = Responsavel
+   context_object_name = 'responsavel'
+   template_name = 'core/responsavel/confirm_delete.html'
+   success_url = '/responsavel'     
 
 class ProtocoloView(ListView):
    model = Protocolo
@@ -111,7 +141,13 @@ class ProtocoloCreate(CreateView):
 class ProtocoloUpdate(UpdateView):
    model = Protocolo
    success_url = '/protocolo'
-   template_name = 'core/protocolo/edit.html'     
+   template_name = 'core/protocolo/edit.html'   
+
+class ProtocoloDelete(DeleteView):
+   model = Protocolo
+   context_object_name = 'protocolo'
+   template_name = 'core/protocolo/confirm_delete.html'
+   success_url = '/protocolo'
 
 
 
