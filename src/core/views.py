@@ -28,6 +28,7 @@ class AreaCreate(CreateView):
 
 class AreaUpdate(UpdateView):
    model = Area
+   fields = ['sigla', 'nome']
    success_url = '/areas'
    template_name = 'core/area/edit.html'
 
@@ -50,6 +51,7 @@ class UfCreate(CreateView):
 
 class UfUpdate(UpdateView):
    model = Uf
+   fields = ['sigla', 'nome']
    success_url = '/uf'
    template_name = 'core/uf/edit.html'
 
@@ -72,6 +74,7 @@ class TipoDocumentoCreate(CreateView):
 
 class TipoDocumentoUpdate(UpdateView):
    model = TipoDocumento
+   fields = ['nome']
    success_url = '/tipodocumento'
    template_name = 'core/tipodocumento/edit.html'
 
@@ -94,6 +97,7 @@ class PessoaCreate(CreateView):
 
 class PessoaUpdate(UpdateView):
    model = Pessoa
+   fields = ['nome', 'email', 'uf']
    success_url = '/pessoa'
    template_name = 'core/pessoa/edit.html' 
 
@@ -116,6 +120,7 @@ class ResponsavelCreate(CreateView):
 
 class ResponsavelUpdate(UpdateView):
    model = Responsavel
+   fields = ['pessoa', 'data']
    success_url = '/responsavel'
    template_name = 'core/responsavel/edit.html'
 
@@ -140,6 +145,8 @@ class ProtocoloCreate(CreateView):
 
 class ProtocoloUpdate(UpdateView):
    model = Protocolo
+   fields = ['seq', 'ano', 'dv', 'numero', 'data_protocolo', 'numero_documento', 'data_emissao'
+            ,'assunto', 'usuario', 'tipo_documento', 'observacao']
    success_url = '/protocolo'
    template_name = 'core/protocolo/edit.html'   
 
